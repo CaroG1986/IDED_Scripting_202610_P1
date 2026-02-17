@@ -4,12 +4,14 @@
     {
         public static void SeparateElements(Queue<int> input, out Stack<int> included, out Stack<int> excluded)
         {
+            //Aqui se inician las dos pilas
             included = new Stack<int>();
             excluded = new Stack<int>();
 
             Stack<int> auxIncluded = new Stack<int>();
             Stack<int> auxExcluded = new Stack<int>();
 
+            // se dividen dependiendo de que pila pertenece
             while (input.Count > 0)
             {
                 int number = input.Dequeue();
@@ -24,6 +26,7 @@
                 }
             }
 
+            //Meter lo que va saliendo de la fila auxiliar
             while (auxIncluded.Count > 0)
             {
                 included.Push(auxIncluded.Pop());
@@ -36,22 +39,28 @@
 
         }
 
+        //Una función  para revisar si pertenece a la secuencia
         private static bool BelongsToSequence(int number)
         {
             if (number == 0)
                 return false;
 
+            // como hay varios numeros negativos los pasa a positivos para revisar mejor su raiz cuadrada 
             int value = number;
             if (value < 0)
                 value = -value;
 
+            // debe verificar que tengan raiz cuadrada exacta 
             int root = (int)Math.Sqrt(value);
 
             if (root * root != value)
                 return false;
 
+            // si el numero es positivo debe ser par
             if (number > 0 && root % 2 == 0)
                 return true;
+
+            // si es negativo debe ser impar
 
             if (number < 0 && root % 2 == 1)
                 return true;
@@ -62,37 +71,25 @@
 
         public static List<int> GenerateSortedSeries(int n)
         {
-            if (n % 2 == 0)
-            {
-                Console.WriteLine("El tamaño debe ser impar.");
-                return null;
-            }
-
+            // se crea la lista
             List<int> lista = new List<int>();
-            Random rnd = new Random();
 
-           
-            for (int i = 0; i < n; i++)
+            for (int i = 1; i <= n; i++)
             {
-                lista.Add(rnd.Next(0, 100));
-            }
+                int termino = i * i;   // n^2
 
-          
-            for (int i = 0; i < lista.Count - 1; i++)
-            {
-                for (int j = 0; j < lista.Count - 1 - i; j++)
+                // Si i es impar, el signo es negativo
+                if (i % 2 == 1)
                 {
-                    if (lista[j] < lista[j + 1])
-                    {
-                        int temp = lista[j];
-                        lista[j] = lista[j + 1];
-                        lista[j + 1] = temp;
-                    }
+                    termino = -termino;
                 }
+
+                lista.Add(termino);
             }
 
             return lista;
         }
+
         public static bool BuscarNumero(List<int> lista, int numero)
         {
             for (int i = 0; i < lista.Count; i++)
@@ -105,32 +102,41 @@
         }
         public static bool FindNumberInSortedList(int target, in List<int> list)
         {
-            // Primero ordenamos manualmente descendente
-            for (int i = 0; i < list.Count - 1; i++)
+            // Crear copia manual para no modificar la original
+            List<int> sortedList = new List<int>();
+
+            for (int i = 0; i < list.Count; i++)
             {
-                for (int j = 0; j < list.Count - 1 - i; j++)
+                sortedList.Add(list[i]);
+            }
+
+            // Ordenamiento descendente (Bubble Sort manual)
+            for (int i = 0; i < sortedList.Count - 1; i++)
+            {
+                for (int j = 0; j < sortedList.Count - 1 - i; j++)
                 {
-                    if (list[j] < list[j + 1])
+                    if (sortedList[j] < sortedList[j + 1])
                     {
-                        int temp = list[j];
-                        list[j] = list[j + 1];
-                        list[j + 1] = temp;
+                        int temp = sortedList[j];
+                        sortedList[j] = sortedList[j + 1];
+                        sortedList[j + 1] = temp;
                     }
                 }
             }
 
-            // Luego búsqueda binaria
+            // Búsqueda binaria en lista descendente
             int left = 0;
-            int right = list.Count - 1;
+            int right = sortedList.Count - 1;
 
             while (left <= right)
             {
                 int middle = (left + right) / 2;
 
-                if (list[middle] == target)
+                if (sortedList[middle] == target)
                     return true;
 
-                if (target < list[middle])
+                // OJO: lógica para orden descendente
+                if (target < sortedList[middle])
                     left = middle + 1;
                 else
                     right = middle - 1;
