@@ -115,14 +115,15 @@
                 }
             }
 
-            
+            // esto de aqui es busqueda binaria
+
             int left = 0;
             int right = sortedList.Count - 1;
 
             while (left <= right)
             {
                 int middle = (left + right) / 2;
-
+                // si lo que se encuentra es igual a lo que se busca entonces es verdadero
                 if (sortedList[middle] == target)
                     return true;
 
@@ -184,7 +185,7 @@
                     eliminado = true;
                     continue;
                 }
-
+                // se contruye la pila final
                 resultado.Push(valor);
             }
 
