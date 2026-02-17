@@ -115,7 +115,7 @@
                 if (list[middle] == target)
                     return true;
 
-                // OJO: la lista está ordenada DESCENDENTE
+                
                 if (target < list[middle])
                     left = middle + 1;
                 else
