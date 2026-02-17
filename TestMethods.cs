@@ -150,8 +150,53 @@
             return true;
         }
 
-        public static Stack<int> RemoveFirstPrime(in Stack<int> stack) => null;
+        public static Stack<int> RemoveFirstPrime(in Stack<int> stack)
+        {
+            Stack<int> auxiliar = new Stack<int>();
+            Stack<int> resultado = new Stack<int>();
+            bool eliminado = false;
 
-        public static Queue<int> QueueFromStack(Stack<int> stack) => null;
+            // Copiamos a auxiliar para invertir
+            foreach (int valor in stack)
+            {
+                auxiliar.Push(valor);
+            }
+
+            // Reconstruimos sin el primer primo
+            while (auxiliar.Count > 0)
+            {
+                int valor = auxiliar.Pop();
+
+                if (!eliminado && IsPrime(valor))
+                {
+                    eliminado = true;
+                    continue;
+                }
+
+                resultado.Push(valor);
+            }
+
+            return resultado;
+        }
+
+        public static Queue<int> QueueFromStack(Stack<int> stack)
+        {
+            Stack<int> auxiliar = new Stack<int>();
+            Queue<int> cola = new Queue<int>();
+
+            // Invertimos la pila
+            foreach (int valor in stack)
+            {
+                auxiliar.Push(valor);
+            }
+
+            // Pasamos a la cola
+            while (auxiliar.Count > 0)
+            {
+                cola.Enqueue(auxiliar.Pop());
+            }
+
+            return cola;
+        }
     }
 }
