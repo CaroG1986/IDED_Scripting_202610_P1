@@ -71,13 +71,13 @@
             List<int> lista = new List<int>();
             Random rnd = new Random();
 
-            // Llenar con números aleatorios
+           
             for (int i = 0; i < n; i++)
             {
                 lista.Add(rnd.Next(0, 100));
             }
 
-            // Ordenar descendente (burbuja manual)
+          
             for (int i = 0; i < lista.Count - 1; i++)
             {
                 for (int j = 0; j < lista.Count - 1 - i; j++)
@@ -93,7 +93,16 @@
 
             return lista;
         }
+        public static bool BuscarNumero(List<int> lista, int numero)
+        {
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i] == numero)
+                    return true;
+            }
 
+            return false;
+        }
         public static bool FindNumberInSortedList(int target, in List<int> list) => false;
 
         public static int FindPrime(in Stack<int> list) => 0;
