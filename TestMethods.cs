@@ -33,6 +33,7 @@
             {
                 excluded.Push(auxExcluded.Pop());
             }
+
         }
 
         private static bool BelongsToSequence(int number)
@@ -59,7 +60,39 @@
         }
 
 
-        public static List<int> GenerateSortedSeries(int n) => null;
+        public static List<int> GenerateSortedSeries(int n)
+        {
+            if (n % 2 == 0)
+            {
+                Console.WriteLine("El tamaño debe ser impar.");
+                return null;
+            }
+
+            List<int> lista = new List<int>();
+            Random rnd = new Random();
+
+            // Llenar con números aleatorios
+            for (int i = 0; i < n; i++)
+            {
+                lista.Add(rnd.Next(0, 100));
+            }
+
+            // Ordenar descendente (burbuja manual)
+            for (int i = 0; i < lista.Count - 1; i++)
+            {
+                for (int j = 0; j < lista.Count - 1 - i; j++)
+                {
+                    if (lista[j] < lista[j + 1])
+                    {
+                        int temp = lista[j];
+                        lista[j] = lista[j + 1];
+                        lista[j + 1] = temp;
+                    }
+                }
+            }
+
+            return lista;
+        }
 
         public static bool FindNumberInSortedList(int target, in List<int> list) => false;
 
