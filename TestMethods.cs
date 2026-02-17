@@ -90,16 +90,7 @@
             return lista;
         }
 
-        public static bool BuscarNumero(List<int> lista, int numero)
-        {
-            for (int i = 0; i < lista.Count; i++)
-            {
-                if (lista[i] == numero)
-                    return true;
-            }
-
-            return false;
-        }
+    
         public static bool FindNumberInSortedList(int target, in List<int> list)
         {
             // Crear copia manual para no modificar la original
