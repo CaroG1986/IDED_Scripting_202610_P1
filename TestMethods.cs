@@ -93,7 +93,7 @@
     
         public static bool FindNumberInSortedList(int target, in List<int> list)
         {
-            // Crear copia manual para no modificar la original
+            
             List<int> sortedList = new List<int>();
 
             for (int i = 0; i < list.Count; i++)
@@ -101,7 +101,7 @@
                 sortedList.Add(list[i]);
             }
 
-            // Ordenamiento descendente (Bubble Sort manual)
+            
             for (int i = 0; i < sortedList.Count - 1; i++)
             {
                 for (int j = 0; j < sortedList.Count - 1 - i; j++)
@@ -115,7 +115,7 @@
                 }
             }
 
-            // Búsqueda binaria en lista descendente
+            
             int left = 0;
             int right = sortedList.Count - 1;
 
@@ -126,7 +126,7 @@
                 if (sortedList[middle] == target)
                     return true;
 
-                // OJO: lógica para orden descendente
+                
                 if (target < sortedList[middle])
                     left = middle + 1;
                 else
@@ -168,13 +168,13 @@
             Stack<int> resultado = new Stack<int>();
             bool eliminado = false;
 
-            // Copiamos a auxiliar para invertir
+            
             foreach (int valor in stack)
             {
                 auxiliar.Push(valor);
             }
 
-            // Reconstruimos sin el primer primo
+            
             while (auxiliar.Count > 0)
             {
                 int valor = auxiliar.Pop();
@@ -196,13 +196,13 @@
             Stack<int> auxiliar = new Stack<int>();
             Queue<int> cola = new Queue<int>();
 
-            // Invertimos la pila
+           
             foreach (int valor in stack)
             {
                 auxiliar.Push(valor);
             }
 
-            // Pasamos a la cola
+            
             while (auxiliar.Count > 0)
             {
                 cola.Enqueue(auxiliar.Pop());
