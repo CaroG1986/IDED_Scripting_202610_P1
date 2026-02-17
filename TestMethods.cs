@@ -103,11 +103,52 @@
 
             return false;
         }
-        public static bool FindNumberInSortedList(int target, in List<int> list) => false;
+        public static bool FindNumberInSortedList(int target, in List<int> list)
+        {
+            int left = 0;
+            int right = list.Count - 1;
 
-        public static int FindPrime(in Stack<int> list) => 0;
+            while (left <= right)
+            {
+                int middle = (left + right) / 2;
 
-        public static bool IsPrime(int n) => false;
+                if (list[middle] == target)
+                    return true;
+
+                // OJO: la lista está ordenada DESCENDENTE
+                if (target < list[middle])
+                    left = middle + 1;
+                else
+                    right = middle - 1;
+            }
+
+            return false;
+        }
+
+        public static int FindPrime(in Stack<int> list)
+        {
+            foreach (int value in list)
+            {
+                if (IsPrime(value))
+                    return value;
+            }
+
+            return 0;
+        }
+
+        public static bool IsPrime(int n)
+        {
+            if (n <= 1)
+                return false;
+
+            for (int i = 2; i * i <= n; i++)
+            {
+                if (n % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
 
         public static Stack<int> RemoveFirstPrime(in Stack<int> stack) => null;
 
