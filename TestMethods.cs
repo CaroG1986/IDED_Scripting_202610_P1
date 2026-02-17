@@ -105,6 +105,21 @@
         }
         public static bool FindNumberInSortedList(int target, in List<int> list)
         {
+            // Primero ordenamos manualmente descendente
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                for (int j = 0; j < list.Count - 1 - i; j++)
+                {
+                    if (list[j] < list[j + 1])
+                    {
+                        int temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+                    }
+                }
+            }
+
+            // Luego búsqueda binaria
             int left = 0;
             int right = list.Count - 1;
 
@@ -115,7 +130,6 @@
                 if (list[middle] == target)
                     return true;
 
-                
                 if (target < list[middle])
                     left = middle + 1;
                 else
@@ -124,6 +138,7 @@
 
             return false;
         }
+
 
         public static int FindPrime(in Stack<int> list)
         {
