@@ -203,7 +203,7 @@
                 auxiliar.Push(valor);
             }
 
-            
+             
             while (auxiliar.Count > 0)
             {
                 cola.Enqueue(auxiliar.Pop());
